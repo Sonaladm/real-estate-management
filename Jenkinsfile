@@ -21,7 +21,7 @@ pipeline {
         AWS_ACCOUNT_ID="682484440485"
         AWS_DEFAULT_REGION="ap-south-1"
         BRANCH_NAME="main"
-        IMAGE_REPO_NAME="myecr"
+        IMAGE_REPO_NAME="sonalecr"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
     }
  
