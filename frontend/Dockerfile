@@ -1,12 +1,13 @@
-FROM node:16
+FROM node:18
 WORKDIR /app
-COPY . .
+COPY package* ./
 RUN npm install
-CMD ["iconic", "server"]
-api: {
-    url: 'http://localhost:8000/', <-- server URL
-    mapKey: '', <-- Leaflet map key,
-    googleAuthClientId: '', <-- google Auth CLient ID for Social signin
-    webSocketUrl: 'ws://localhost:8000/websocket' <-- websocket URL
-  }
+COPY . .
+RUN npm run build
 EXPOSE 80
+
+
+FROM nginx:alpine
+COPY --from=build /app /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g","daeamon off;"]
