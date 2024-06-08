@@ -1,13 +1,9 @@
 FROM node:18
 WORKDIR /app
-COPY package* ./
+COPY package*.json ./
+RUN npm install -g @angular/cli
 RUN npm install
 COPY . .
 RUN npm run build
-EXPOSE 80
-
-
-FROM nginx:alpine
-COPY --from=build /app /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g","daeamon off;"]
+EXPOSE 4200
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
