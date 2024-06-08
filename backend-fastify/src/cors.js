@@ -6,7 +6,7 @@ export const setFastifyCors = function (fastify) {
     origin: [
       "http://localhost:9000",
       "http://localhost:8100",
-      "http://13.208.79.151:4200",
+      "http://15.152.236.53:4200",
     ],
   });
 };
