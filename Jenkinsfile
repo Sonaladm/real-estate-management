@@ -56,9 +56,8 @@ pipeline {
                 script {
                     sh "sudo docker rm -f ${IMAGE_REPO_NAME}-${BRANCH_NAME} || true"
                     sh "sudo docker images -a -q | xargs docker rmi -f || true"
-                    sh " sudo docker network create sonal"
-                    sh " sudo docker run -itd --name ${IMAGE_REPO_NAME}-${BRANCH_NAME} --network sonal -p 4200:4200 --restart always ${REPOSITORY_URI}:${BRANCH_NAME}"
-                    sh " sudo docker run -itd --name front${IMAGE_REPO_NAME}-${BRANCH_NAME} --network sonal -p 8000:8000 --restart always front${REPOSITORY_URI}:${BRANCH_NAME}"
+                    sh " sudo docker run -d --name ${IMAGE_REPO_NAME}-${BRANCH_NAME} -p 4200:4200 --restart always ${REPOSITORY_URI}:${BRANCH_NAME}"
+                    sh " sudo docker run -d --name front${IMAGE_REPO_NAME}-${BRANCH_NAME}  -p 8000:8000 --restart always front${REPOSITORY_URI}:${BRANCH_NAME}"
                     
                 }
             }
