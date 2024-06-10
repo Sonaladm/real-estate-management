@@ -12,7 +12,7 @@ pipeline{
         stage("build the image"){
             steps{
             sh "docker build -t 682484440485.dkr.ecr.ap-northeast-3.amazonaws.com/myecr:frontend ./frontend"
-            sh "docker build -t 682484440485.dkr.ecr.ap-northeast-3.amazonaws.com/myec:backend ./backend-fastify"
+            sh "docker build -t 682484440485.dkr.ecr.ap-northeast-3.amazonaws.com/myecr:backend ./backend-fastify"
                 
             }
             
