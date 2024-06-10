@@ -56,8 +56,8 @@ pipeline {
                 script {
                     sh "sudo docker rm -f ${IMAGE_REPO_NAME}-${BRANCH_NAME} || true"
                     sh "sudo docker images -a -q | xargs docker rmi -f || true"
-                    sh " sudo docker run -d --name -p 4200:4200 "
-                    sh " sudo docker run -d --name -p 8000:8000 "
+                    sh " sudo docker run -d --name -p 4200:4200  front${REPOSITORY_URI}:${BRANCH_NAME}  "
+                    sh " sudo docker run -d --name -p 8000:8000 ${REPOSITORY_URI}:${BRANCH_NAME}  "
             }
         }
     }
