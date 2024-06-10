@@ -1,41 +1,7 @@
 pipeline {
     agent any
 
-    /* parameters {
-        string(
-            name: 'AWS_ACCOUNT_ID',
-            description: 'Account ID of the AWS you want to build'
-        ),
-        string(
-            name: 'AWS_DEFAULT_REGION',
-            description: 'Name of the Region you want to build'
-        ),
-        string(
-            name: 'BRANCH_NAME',
-            description: 'Name of the branch you want to build'
-        )
-
-    }*/
-
-    environment {
-        AWS_ACCOUNT_ID="682484440485"
-        AWS_DEFAULT_REGION="ap-northeast-3"
-        BRANCH_NAME="main"
-        IMAGE_REPO_NAME="myecr"
-        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-    }
- 
-    stages {
- 
-        stage('Logging into AWS ECR') {
-            steps {
-                script {
-                    sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-                    sh "docker images -a -q | xargs docker rmi -f || true"
-                }
- 
-            }
-        }
+  
  
  
  // Building Docker images
