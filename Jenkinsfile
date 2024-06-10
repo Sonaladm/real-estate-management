@@ -59,7 +59,7 @@ pipeline {
         }
 
  //Creating container 
-        stage('creating container for landingpage') {
+        stage('creating container for my-app') {
             steps{ 
                 script {
                     sh "  /home/ubuntu/login-ecr.sh"             
