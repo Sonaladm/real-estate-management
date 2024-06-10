@@ -19,9 +19,9 @@ pipeline {
 
     environment {
         AWS_ACCOUNT_ID="682484440485"
-        AWS_DEFAULT_REGION="ap-south-1"
+        AWS_DEFAULT_REGION="ap-northeast-3"
         BRANCH_NAME="main"
-        IMAGE_REPO_NAME="sonalecr"
+        IMAGE_REPO_NAME="myecr"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
     }
  
@@ -62,13 +62,13 @@ pipeline {
         stage('creating container for landingpage') {
             steps{ 
                 script {
-                    sh "ssh ubuntu@13.200.151.201 /home/ubuntu/login-ecr.sh"             
-                    sh "ssh ubuntu@13.200.151.201 sudo docker rm -f ${IMAGE_REPO_NAME}-${BRANCH_NAME} || true"
-                    sh "ssh ubuntu@13.200.151.201 sudo docker images -a -q | xargs docker rmi -f || true"
-                    sh "ssh ubuntu@13.200.151.201 sudo docker network create sonal"
-                    sh "ssh ubuntu@13.200.151.201 sudo docker run -itd --name ${IMAGE_REPO_NAME}-${BRANCH_NAME} --network sonal -p 8000:8000 --restart always ${REPOSITORY_URI}:${BRANCH_NAME}"
-                    sh "ssh ubuntu@13.200.151.201 sudo docker run -itd --name front${IMAGE_REPO_NAME}-${BRANCH_NAME} --network sonal -p 80:80 --restart always front${REPOSITORY_URI}:${BRANCH_NAME}"
-                    sh "ssh ubuntu@13.200.151.201 sudo docker run --name mongodb --network sonal -p 27017:27017"
+                    sh "  /home/ubuntu/login-ecr.sh"             
+                    sh "sudo docker rm -f ${IMAGE_REPO_NAME}-${BRANCH_NAME} || true"
+                    sh "sudo docker images -a -q | xargs docker rmi -f || true"
+                    sh " sudo docker network create sonal"
+                    sh " sudo docker run -itd --name ${IMAGE_REPO_NAME}-${BRANCH_NAME} --network sonal -p 4200:4200 --restart always ${REPOSITORY_URI}:${BRANCH_NAME}"
+                    sh " sudo docker run -itd --name front${IMAGE_REPO_NAME}-${BRANCH_NAME} --network sonal -p 8000:8000 --restart always front${REPOSITORY_URI}:${BRANCH_NAME}"
+                    
                 }
             }
         }
