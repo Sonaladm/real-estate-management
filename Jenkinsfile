@@ -48,15 +48,7 @@ pipeline {
             }
         }
  
- // Uploading Docker images into AWS ECR
-        stage('Pushing to ECR') {
-            steps{ 
-                script {
-                    sh "docker push ${REPOSITORY_URI}:${BRANCH_NAME}"
-                    sh "docker push front${REPOSITORY_URI}:${BRANCH_NAME}"
-                }
-            }
-        }
+
 
  //Creating container 
         stage('creating container for my-app') {
