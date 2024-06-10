@@ -42,8 +42,8 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    sh "docker build -t ${REPOSITORY_URI}:${BRANCH_NAME} ./backend-fastify"
-                    sh "docker build -t front${REPOSITORY_URI}:${BRANCH_NAME} ./frontend"   
+                    sh "docker build -t backend ./backend-fastify"
+                    sh "docker build -t front ./frontend"   
                 }
             }
         }
@@ -56,8 +56,8 @@ pipeline {
                 script {
                     sh "sudo docker rm -f ${IMAGE_REPO_NAME}-${BRANCH_NAME} || true"
                     sh "sudo docker images -a -q | xargs docker rmi -f || true"
-                    sh " sudo docker run -d --name -p 4200:4200  front${REPOSITORY_URI}:${BRANCH_NAME}  "
-                    sh " sudo docker run -d --name -p 8000:8000 ${REPOSITORY_URI}:${BRANCH_NAME}  "
+                    sh " sudo docker run -d --name -p 4200:4200  front  "
+                    sh " sudo docker run -d --name -p 8000:8000 backend  "
             }
         }
     }
