@@ -54,7 +54,6 @@ pipeline {
         stage('creating container for my-app') {
             steps{ 
                 script {
-                    sh "  /home/ubuntu/login-ecr.sh"             
                     sh "sudo docker rm -f ${IMAGE_REPO_NAME}-${BRANCH_NAME} || true"
                     sh "sudo docker images -a -q | xargs docker rmi -f || true"
                     sh " sudo docker network create sonal"
