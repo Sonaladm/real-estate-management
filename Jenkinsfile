@@ -6,7 +6,7 @@ pipeline{
             steps{
                 
                   sh "aws ecr get-login-password --region ap-northeast-3 | docker login --username AWS --password-stdin 682484440485.dkr.ecr.ap-northeast-3.amazonaws.com"
-                  sh "docker images -a -q | xargs docker rmi -f || true"
+                
             }
         }
         stage("build the image"){
