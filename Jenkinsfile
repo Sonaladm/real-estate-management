@@ -11,24 +11,24 @@ pipeline{
         }
         stage("build the image"){
             steps{
-            sh "docker build -t frontendmyecr682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:latest ./frontend"
-            sh "docker build -t backendmyecr682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:latest ./backend-fastify"
+            sh "docker build -t 682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:frontend ./frontend"
+            sh "docker build -t 682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:backend ./backend-fastify"
                 
             }
             
         }
         stage("pusing to ecr"){
             steps{
-            sh "docker push frontendmyecr682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:latest"
-            sh "docker push backendmyecr682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:latest"
+            sh "docker push 682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:frontend"
+            sh "docker push 682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:backend"
                 
             }
             
         }
-        stage("creating acontainer"){
+        stage("creating container"){
             steps{
-            sh "docker run -d -p 4200:4200 frontendmyecr682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:latest"
-            sh "docker run -d -p 8000:8000 backendmyecr682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:latest"
+            sh "docker run -d -p 4200:4200 682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:frontend"
+            sh "docker run -d -p 8000:8000 682484440485.dkr.ecr.ap-south-1.amazonaws.com/myecr:backend"
                 
             }
         }
